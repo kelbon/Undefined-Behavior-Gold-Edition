@@ -18,7 +18,7 @@ jobs:
 
       - name: Configure CMake
         run: |
-          cmake . -DBUILD_TESTING=ON -B build \
+          cmake . -B build \
             -G "Ninja"                   \
             -DCMAKE_BUILD_TYPE=Debug     \
             -DCMAKE_C_COMPILER=clang-14     \
@@ -26,9 +26,3 @@ jobs:
       - name: Build
         run:
           cmake --build build
-         
-      - name: Test
-        run: |
-          cd build
-          ctest --output-on-failure -C Debug -V
-          ctest --output-on-failure -C Release -V
