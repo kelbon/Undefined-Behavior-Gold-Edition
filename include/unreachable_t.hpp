@@ -1,5 +1,7 @@
 #pragma once
 
+#include <exception>
+
 namespace art {
 
   struct [[maybe_unused]] unreachable_t final {
