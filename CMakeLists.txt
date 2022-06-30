@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.21)
-project(UBGE LANGUAGES)
+project(UBGE LANGUAGES CXX)
 
 file(GLOB ${PROJECT_NAME}_SRCES ${CMAKE_CURRENT_SOURCE_DIR}/include/* )
 add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_SRCES} ${CMAKE_CURRENT_SOURCE_DIR}/tests/main.cpp)

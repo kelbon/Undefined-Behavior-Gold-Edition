@@ -11,11 +11,11 @@ namespace art {
     // never called, must be without returns, but fcn msvc requires it
     template <typename T>
     [[noreturn]] constexpr operator T&() const noexcept {
-      return *(T*)(void*)nullptr;
+      std::terminate();
     }
     template <typename T>
     [[noreturn]] constexpr operator T&&() const noexcept {
-      return std::move(*(T*)(void*)nullptr);
+      std::terminate();
     }
   };
 
