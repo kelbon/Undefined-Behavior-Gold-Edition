@@ -18,6 +18,7 @@ namespace art {
 
   template <typename... Ts>
   struct union_t {
+      // clang-bug now here(with ranges)
     alignas(std::ranges::max({alignof(Ts)...})) std::array<std::byte, std::ranges::max({sizeof(Ts)...})> buf;
 
     template<any_of<Ts...> U, typename... Args>

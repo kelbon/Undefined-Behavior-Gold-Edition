@@ -7,6 +7,7 @@
 #include <array.hpp>
 #include <maybe.hpp>
 
+#include <fizzbuzz_compiler_error.hpp>
 #include <iostream>
 
 void foo(const std::variant<int, float, double> a, std::variant<char, bool, int> b) {
@@ -34,6 +35,9 @@ void foobarvoid(std::string s) {
 }
 
 int main() {
+#ifdef CALL_FIZZ_BUZZ
+  art::fizz_buzz();
+#endif
   true ? foobarvoid("") : std::terminate();
   int i = 0;
   art::maybe<int> mb = &i;
@@ -51,7 +55,7 @@ int main() {
   constexpr auto erased_foo2 = art::voidify<&foobarvoid>(&foobarvoid);
   art::union_t<int, float, std::string> u;
   (void)u.emplace<std::string>("union is useless");
-  auto& x =u.read_as<std::string>();
+  auto& x = u.read_as<std::string>();
   (void)x;
   u.destroy_as<std::string>();
   art::array<int, 10> arr{1, 2, 34};
