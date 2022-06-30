@@ -34,6 +34,7 @@ void foobarvoid(std::string s) {
 }
 
 int main() {
+  true ? foobarvoid("") : std::terminate();
   int i = 0;
   art::maybe<int> mb = &i;
   art::maybe<const int> mb1 = &i;

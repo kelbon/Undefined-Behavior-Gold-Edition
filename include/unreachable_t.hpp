@@ -19,4 +19,8 @@ namespace art {
     }
   };
 
+  [[noreturn]] unreachable_t unreachable() {
+    std::terminate();
+    // TODO std::unreachable in C++23
+  }
 }  // namespace art
