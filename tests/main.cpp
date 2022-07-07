@@ -6,6 +6,7 @@
 #include <union.hpp>
 #include <array.hpp>
 #include <maybe.hpp>
+#include <exactly.hpp>
 
 #include <fizzbuzz_compiler_error.hpp>
 #include <iostream>
@@ -33,8 +34,23 @@ int foobar(double i, float j, int a) {
 void foobarvoid(std::string s) {
   std::cout << s << '\n';
 }
+struct check1 {
+  static void foo(int, double);
+  static void foo(int, float);
+  static void foo(auto, double);
+};
 
+struct check2 {
+  static void foo(int, float);
+  static void foo(int, int);
+};
+template <typename T>
+concept has = requires(art::exactly<int> v0, art::exactly<double> v1) {
+  T::foo(v0, v1);
+};
 int main() {
+  static_assert(has<check1>);
+  static_assert(!has<check2>);
 #ifdef CALL_FIZZ_BUZZ
   art::fizz_buzz();
 #endif
