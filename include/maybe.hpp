@@ -64,21 +64,13 @@ namespace art {
       assert(value_ptr != nullptr);
       return value_ptr;
     }
-    constexpr T& operator*() & noexcept {
+    constexpr T& operator*() noexcept {
       assert(value_ptr != nullptr);
       return *value_ptr;
     }
-    constexpr const T& operator*() const& noexcept {
+    constexpr const T& operator*() const noexcept {
       assert(value_ptr != nullptr);
       return *value_ptr;
-    }
-    constexpr T&& operator*() && noexcept {
-      assert(value_ptr != nullptr);
-      return std::move(*value_ptr);
-    }
-    constexpr const T&& operator*() const&& noexcept {
-      assert(value_ptr != nullptr);
-      return std::move(*value_ptr);
     }
   };
 

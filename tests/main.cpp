@@ -49,6 +49,9 @@ concept has = requires(art::exactly<int> v0, art::exactly<double> v1) {
   T::foo(v0, v1);
 };
 int main() {
+  std::variant<int, float, double> d{5.};
+  std::variant<int, float, double> dd{5};
+  art::visit([](auto&&... x) { (std::cout << ... << std::is_const_v<std::remove_reference_t<decltype(x)>>); }, d, dd);
   static_assert(has<check1>);
   static_assert(!has<check2>);
 #ifdef CALL_FIZZ_BUZZ
@@ -65,10 +68,10 @@ int main() {
   art::maybe mbs1 = &std::as_const(s);
   mbs->resize(1);
   std::cout << mbs1->size() << '\n';
-  constexpr auto erased_foo = art::voidify<&foobar>(&foobar);
+  constexpr auto erased_foo = art::voidify_fn<&foobar>(&foobar);
   auto res = art::call_voidified_as(&foobar, erased_foo, 143.5, 3.14f, 15);
   std::cout << res << '\n';
-  constexpr auto erased_foo2 = art::voidify<&foobarvoid>(&foobarvoid);
+  constexpr auto erased_foo2 = art::voidify_fn<&foobarvoid>(&foobarvoid);
   art::union_t<int, float, std::string> u;
   (void)u.emplace<std::string>("union is useless");
   auto& x = u.read_as<std::string>();
